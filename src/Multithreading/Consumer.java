@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package Multithreading;
 
 import java.util.logging.Level;
@@ -11,10 +5,12 @@ import java.util.logging.Logger;
 
 import Screen.MainPanel;
 
-/**
- *
- * @author Kevintroko
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
+
 
 public class Consumer extends Thread {
     private Buffer buffer;
@@ -34,7 +30,7 @@ public class Consumer extends Thread {
         
         while (true) {
             try {
-		product = this.buffer.consume();
+				product = this.buffer.consume();
 			
             if (product != null) {
             	double result = getResult(product);
@@ -51,6 +47,8 @@ public class Consumer extends Thread {
 	                Logger.getLogger(Buffer.class.getName()).log(Level.SEVERE, null, e);
 	           }
            }
+        
+       
     }
     
     public double getResult(String product) {
@@ -75,4 +73,3 @@ public class Consumer extends Thread {
     	return valueToShow;
     }
 }
-

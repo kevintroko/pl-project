@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Multithreading;
 
 import java.util.LinkedList;
@@ -15,12 +10,14 @@ import java.util.logging.Logger;
 
 import Screen.MainPanel;
 
-
-/**
- *
- * @author Kevintroko
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
-public class Buffer {
+
+ public class Buffer {
+    
     private Queue<String> bufferStorage;
     private int bufferLength;
     private int consumerOperations, producerOperations;
@@ -30,6 +27,7 @@ public class Buffer {
     private MainPanel mainPanel;
     
     public Buffer(int length, MainPanel mainPanel) {
+       // this.bufferStorage = new LinkedList<>(Arrays.asList(new String[length]));
         this.bufferStorage = new LinkedList<String>();
         this.bufferLength = length;
         this.consumerOperations = 0;
@@ -53,9 +51,9 @@ public class Buffer {
 		        notFull.signal();
 		        
 		        return product;
-    	} finally {
-		lock.unlock();
-	}    
+    		}finally {
+			 lock.unlock();
+		 }    
     }
     
     public void produce(String product) throws InterruptedException {
@@ -72,5 +70,5 @@ public class Buffer {
         } finally {
             lock.unlock();
         }  
-    } 
+    }    
 }

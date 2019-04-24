@@ -1,16 +1,16 @@
+package Multithreading;
+
+import java.util.Random;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Multithreading;
-
-import java.util.Random;
-
 
 /**
  *
- * @author Kevintroko
+ * @author victormanuel
  */
 public class LispOperations {
    final char[] operands = {'+', '-', '/', '*'};
