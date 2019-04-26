@@ -9,7 +9,7 @@ public class Main {
 	public static void main(String[] args) {
 		MainPanel cpGeneral = new MainPanel();
 		// Set location
-		cpGeneral.setLocation(50, 0);
+		cpGeneral.setLocation(0, 0);
 		cpGeneral.setVisible(true);
 	}
 }

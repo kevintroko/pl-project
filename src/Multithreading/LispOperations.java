@@ -8,10 +8,7 @@ import java.util.Random;
  * and open the template in the editor.
  */
 
-/**
- *
- * @author victormanuel
- */
+//TODO:  refactor this class
 public class LispOperations {
    final char[] operands = {'+', '-', '/', '*'};
    private int n, m;

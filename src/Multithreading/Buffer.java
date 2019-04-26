@@ -13,7 +13,7 @@ import Screen.MainPanel;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
+//TODO Refactor this
  public class Buffer {
     private int bufferLength,
     			consumerOperations, 

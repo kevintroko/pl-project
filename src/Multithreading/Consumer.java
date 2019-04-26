@@ -11,7 +11,7 @@ import Screen.MainPanel;
  * and open the template in the editor.
  */
 
-
+//TODO refactor this
 public class Consumer extends Thread {
 	
 	// Set initial variables
