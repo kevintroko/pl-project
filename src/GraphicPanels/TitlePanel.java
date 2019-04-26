@@ -9,50 +9,57 @@ import javax.swing.JPanel;
 import javax.swing.JSeparator;
 import javax.swing.SwingConstants;
 
+
+/* @Author Kevin O. */
+
 public class TitlePanel extends JPanel{
 	private static final long serialVersionUID = 1L;
 
+	//Provides a general purpose component for implementing divider lines 
 	JSeparator separator;
 	
+	// Colors definition
+	Color blue  = new Color(0,191,255);	 
+	Color white = new Color(255,255,255);
+	
+	// Create the panel for the title component
 	public TitlePanel(Rectangle bounds){
 		setLayout(null);
 		setBounds(bounds);
-		setBackground(new Color(220, 220, 220));
-		
+		setBackground(this.blue);
 		loadComponents();
 	}
 	
+	// Constructor
 	public TitlePanel(){
 		setLayout(null);
-		setBackground(new Color(220, 220, 220));
-		
 		loadComponents();
 	}
 	
-	public void loadComponents(){
+	public void loadComponents() {
+		// Set the layout for the Separator
 		separator = new JSeparator(SwingConstants.HORIZONTAL);
 		separator.setBounds(0,99,getBounds().width,1);
-		separator.setBackground(Color.LIGHT_GRAY);
 		add(separator);
 		
+		// Title top
 		JLabel jlTitle = new JLabel("                                                         Programming Language Project");
-		jlTitle.setBounds(110,-10,650,100);
-		jlTitle.setFont(new Font("SansSerif", Font.TRUETYPE_FONT, 20));
-		jlTitle.setForeground(new Color(115,115,115));
+		jlTitle.setBounds(110,-15, 650, 100);
+		jlTitle.setFont(new Font("Helvetica", Font.TRUETYPE_FONT, 20));
+		jlTitle.setForeground(this.white);
 		add(jlTitle);
 		
-		JLabel jlBottom = new JLabel("<html>Kevin O. Cabrera <b>A01227157</b>"+ " Valentin Ochoa <b>A01227157</b><html>");
-		jlBottom.setBounds(400,20,650,100);
-		jlBottom.setFont(new Font("SansSerif", Font.TRUETYPE_FONT, 14));
-		jlBottom.setForeground(new Color(115,115,115));
+		// Title names
+		JLabel jlBottom = new JLabel("Kevin O. Cabrera A01227157  Valentin Ochoa A01227157");
+		jlBottom.setBounds(400, 20, 650, 100);
+		jlBottom.setFont(new Font("Helvetica", Font.TRUETYPE_FONT, 14));
+		jlBottom.setForeground(this.white);
 		add(jlBottom);
 	}
 	
 	@Override
 	public void setSize(int width, int height) {
 		super.setSize(width, height);
-		
 		separator.setSize(width, separator.getBounds().height);
-
 	}
 }

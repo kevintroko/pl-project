@@ -1,10 +1,6 @@
 package Graphics;
 
 import java.awt.Color;
-import java.awt.Component;
-import java.awt.Container;
-import java.awt.Dimension;
-import java.awt.LayoutManager;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -18,16 +14,17 @@ import javax.swing.JTextField;
  */
 
 public final class ProducerConsumer {
-
+	
+	// Frame and Panel
     private JFrame frame;
     private JPanel panel;
     
-    //Buttons
-    private JButton btProduce;
-    private JButton btConsume;
+    // Buttons
+    private JButton btnProduce;
+    private JButton btnConsume;
     private JButton startProducerConsumer;
     
-    //JLabels
+    // JLabels
     private JLabel produceLabel;
     private JLabel consumeLabel;
     private JLabel bufferSize;
@@ -35,11 +32,12 @@ public final class ProducerConsumer {
     private JLabel waitingTime;
     private JLabel bufferQuantity;
  
-    //JTextFields
+    // JTextFields
     private JTextField inputBufferSize;
     private JTextField inputWaitingTimeProducers;
     private JTextField inputWaitingTimeConsumers;
     
+    // Constructor
     public ProducerConsumer() {
         createComponents();
         setComponentsFeatures();
@@ -48,30 +46,39 @@ public final class ProducerConsumer {
     }
     
     public void createComponents() {
+    	// Frame and Panel
         frame = new JFrame("Producer Consumer");    
         panel = new JPanel();  
-        btProduce = new JButton("Producer"); 
-        btConsume = new JButton("Consumer");
+        
+        // Button
+        btnProduce = new JButton("Producer"); 
+        btnConsume = new JButton("Consumer");
         startProducerConsumer = new JButton("Start");
-        produceLabel = new JLabel("Producers");
-        consumeLabel = new JLabel("Consumers");
-        bufferSize = new JLabel("Buffer size");
+        
+        // Label
+        produceLabel 	= new JLabel("Producers");
+        consumeLabel 	= new JLabel("Consumers");
+        bufferSize 	 	= new JLabel("Buffer size");
         rangeBufferSize = new JLabel("Range buffer size");
-        bufferQuantity = new JLabel("Quantity");
-        waitingTime = new JLabel("Waiting Time");
-        inputBufferSize = new JTextField();
+        bufferQuantity  = new JLabel("Quantity");
+        waitingTime 	= new JLabel("Waiting Time");
+        
+        // Text Fields
+        inputBufferSize 		  = new JTextField();
         inputWaitingTimeProducers = new JTextField();
         inputWaitingTimeConsumers = new JTextField();
-
     }
     
     public void setComponentsFeatures() {
+    	// Panel
         panel.setBounds(0,0,500,500);
         panel.setBackground(Color.gray); 
-        btProduce.setBounds(50, 50,80,30);   
-        btProduce.setBackground(Color.blue); 
-        btConsume.setBounds(150,50,120,30);  
-        btConsume.setBackground(Color.green);
+        
+        //Button
+        btnProduce.setBounds(50, 50,80,30);   
+        btnProduce.setBackground(Color.blue); 
+        btnConsume.setBounds(150,50,120,30);  
+        btnConsume.setBackground(Color.green);
       
         produceLabel.setBounds(20, 100, 100, 50);
         consumeLabel.setBounds(20, 150, 100 , 50);
@@ -85,8 +92,8 @@ public final class ProducerConsumer {
     
     public void addComponents(){
         this.panel.setLayout(null);
-        this.panel.add(btProduce); 
-        this.panel.add(btConsume); 
+        this.panel.add(btnProduce); 
+        this.panel.add(btnConsume); 
         this.panel.add(produceLabel);
         this.panel.add(consumeLabel);
         this.panel.add(bufferSize);
@@ -101,7 +108,7 @@ public final class ProducerConsumer {
     }
     
     public void setFrameFeatures() {
-        frame.setSize(500,500);    
+        frame.setSize(500, 500);    
         frame.setLayout(null);
         frame.setVisible(true);
         frame.setResizable(false);

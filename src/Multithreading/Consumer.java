@@ -13,13 +13,16 @@ import Screen.MainPanel;
 
 
 public class Consumer extends Thread {
+	
+	// Set initial variables
     private Buffer buffer;
-	private long sleepTime;
-	private MainPanel mainPanel;
+    private long waitTime;
+    private MainPanel mainPanel;
     
-    public Consumer(Buffer buffer, MainPanel mainPanel, int sleepTime) {
+    // Constructor
+    public Consumer(Buffer buffer, MainPanel mainPanel, int waitTime) {
         this.buffer = buffer;
-        this.sleepTime = sleepTime;
+        this.waitTime = waitTime;
         this.mainPanel = mainPanel;
     }
     
@@ -42,13 +45,11 @@ public class Consumer extends Thread {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			       }try {
-	               Thread.sleep(this.sleepTime);
+	               Thread.sleep(this.waitTime);
 	           } catch(InterruptedException e) {
 	                Logger.getLogger(Buffer.class.getName()).log(Level.SEVERE, null, e);
 	           }
            }
-        
-       
     }
     
     public double getResult(String product) {

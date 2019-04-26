@@ -5,8 +5,6 @@ import java.util.Queue;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import Screen.MainPanel;
 
@@ -17,22 +15,21 @@ import Screen.MainPanel;
  */
 
  public class Buffer {
-    
+    private int bufferLength,
+    			consumerOperations, 
+    			producerOperations;    
     private Queue<String> bufferStorage;
-    private int bufferLength;
-    private int consumerOperations, producerOperations;
     private Lock lock = new ReentrantLock();
     private Condition notFull = lock.newCondition();
     private Condition notEmpty = lock.newCondition();
     private MainPanel mainPanel;
     
     public Buffer(int length, MainPanel mainPanel) {
-       // this.bufferStorage = new LinkedList<>(Arrays.asList(new String[length]));
         this.bufferStorage = new LinkedList<String>();
+        this.mainPanel = mainPanel;
         this.bufferLength = length;
         this.consumerOperations = 0;
         this.producerOperations = 0;
-        this.mainPanel = mainPanel;
     }
     
     public String consume() throws InterruptedException {
@@ -42,18 +39,16 @@ import Screen.MainPanel;
 	         while(this.bufferStorage.isEmpty()) {
 	        	 notEmpty.await();
 	         }
-	         	String product = this.bufferStorage.poll();
-		        consumerOperations++;
-		        producerOperations--;
-		        mainPanel.addRemainingCounter(producerOperations);
-		        mainPanel.addCompletedCounter(consumerOperations);
-		        
-		        notFull.signal();
-		        
-		        return product;
-    		}finally {
+	         String product = this.bufferStorage.poll();
+		     consumerOperations++;
+		     producerOperations--;
+		     mainPanel.addRemainingCounter(producerOperations);
+	         mainPanel.addCompletedCounter(consumerOperations);
+	         notFull.signal();
+		     return product;
+    	} finally {
 			 lock.unlock();
-		 }    
+    	}    
     }
     
     public void produce(String product) throws InterruptedException {

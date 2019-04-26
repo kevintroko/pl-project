@@ -16,12 +16,10 @@ public class BootstrapPanel extends JPanel{
 	private JLabel label;
 	
 	private String description;
-	private String iconPath;
 	private int height;
 	
 	public BootstrapPanel(String iconPath, String description){
 		setBackground(new Color(201, 208, 232));
-		this.iconPath = iconPath;
 		this.description = description;
 		setLayout(null);
 		

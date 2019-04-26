@@ -9,8 +9,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
 import java.util.ArrayList;
 
 import javax.swing.DefaultListModel;
@@ -31,23 +29,28 @@ import Multithreading.Buffer;
 import Multithreading.Consumer;
 import Multithreading.Producer;
 
-public class MainPanel extends JFrame implements ActionListener, WindowListener{
+public class MainPanel extends JFrame implements ActionListener {
 	
 	private static final long serialVersionUID = 1L;
-
-	private JMenuBar barMenu;
+	
+	// Menu
 	private JMenu endBarMenu;
+	private JMenuBar barMenu;
 	private JMenuItem barMenuItem;
 	
+	// Container
 	static Container leadContainer;
 
+	// Buttons
 	private BootstrapButton jbStop;
 	private BootstrapButton jbStart;
+	
+	// Panel
+	private JPanel content;
+	private TitlePanel titlePanel;
 	private BootstrapPanel noConsumers;
 	private BootstrapPanel timeProducers;
 	private BootstrapPanel noProducers;
-	private JPanel content;
-	private TitlePanel titlePanel;
 	private BootstrapPanel timeConsumers;
 	private BootstrapPanel bufferSize;
 	private BootstrapPanel valuesN;
@@ -79,8 +82,6 @@ public class MainPanel extends JFrame implements ActionListener, WindowListener{
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setLocationRelativeTo(null);
 		setResizable(false);
-		
-		addWindowListener(this);
 		
 		leadContainer = getContentPane();
 		leadContainer.setLayout(null);
@@ -320,6 +321,7 @@ public class MainPanel extends JFrame implements ActionListener, WindowListener{
 		
 		jbStop.addActionListener( new ActionListener() {
 			
+			@SuppressWarnings("deprecation")
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				for(Producer producer: producers) {
@@ -390,26 +392,4 @@ public class MainPanel extends JFrame implements ActionListener, WindowListener{
 	public void addRemainingDividedByBufferSize(int remainingOps, int bufferLength) {
 		remainingDividedByBufferSize.setText(remainingOps+"/"+bufferLength);
 	}
-	
-	
-	@Override
-	public void windowActivated(WindowEvent arg0) {}
-
-	@Override
-	public void windowClosed(WindowEvent arg0) {}
-
-	@Override
-	public void windowClosing(WindowEvent arg0) {}
-
-	@Override
-	public void windowDeactivated(WindowEvent arg0) {}
-
-	@Override
-	public void windowDeiconified(WindowEvent arg0) {}
-
-	@Override
-	public void windowIconified(WindowEvent arg0) {}
-	
-	@Override
-	public void windowOpened(WindowEvent arg0) {}
 }
