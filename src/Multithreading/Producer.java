@@ -5,26 +5,21 @@ import java.util.logging.Logger;
 
 import Screen.MainPanel;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
 public class Producer extends Thread {
     
     private Buffer buffer;
     private boolean isStart;
-    private LispOperations randomOperations;
-	  private long sleepTime;
-	  private MainPanel mainPanel;
+    private Product randomOperations;
+    private long sleepTime;
+    private MainPanel dashboard;
     
-    public Producer( Buffer buffer, int n, int m, MainPanel mainPanel, int sleepTime) {
+    public Producer(Buffer buffer, MainPanel dashboard, int sleepTime) {
         this.buffer = buffer;
         this.isStart = true;
-        this.randomOperations = new LispOperations(n,m);
         this.sleepTime = sleepTime;
-        this.mainPanel = mainPanel;
+        this.dashboard = dashboard;
+        this.randomOperations = new Product();
     }
     
     @Override
@@ -39,7 +34,7 @@ public class Producer extends Thread {
         	   e1.printStackTrace();
            }
            System.out.println("Producer produced: " + product);
-           mainPanel.addElementToRemainingList("Producer produced: " + product);
+           dashboard.addElementToRemainingList("Producer produced: " + product);
            try {
                Thread.sleep(sleepTime);
            } catch(InterruptedException e) {
