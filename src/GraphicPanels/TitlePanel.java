@@ -1,56 +1,62 @@
 package GraphicPanels;
 
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.Rectangle;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSeparator;
+import javax.swing.SwingConstants;
 
-import Main.Colors;
+import GraphicImage.CustomImageIcon;
 
 
-/* @Author Kevin O. */
 
 public class TitlePanel extends JPanel{
 	private static final long serialVersionUID = 1L;
 
-	//Provides a general purpose component for implementing divider lines 
 	JSeparator separator;
 	
-	// Create the panel for the title component
 	public TitlePanel(Rectangle bounds){
 		setLayout(null);
 		setBounds(bounds);
-		setBackground(Colors.blue);
+		setBackground(new Color(220, 220, 220));
+		
 		loadComponents();
 	}
 	
-	// Constructor
 	public TitlePanel(){
 		setLayout(null);
+		setBackground(new Color(220, 220, 220));
+		
 		loadComponents();
 	}
 	
-	public void loadComponents() {
-
-		// Title top
-		JLabel jlTitle = new JLabel("                                                         Programming Language Project");
-		jlTitle.setBounds(110,-15, 650, 100);
-		jlTitle.setFont(new Font("Helvetica", Font.TRUETYPE_FONT, 20));
-		jlTitle.setForeground(Colors.white);
+	public void loadComponents(){
+		separator = new JSeparator(SwingConstants.HORIZONTAL);
+		separator.setBounds(0,99,getBounds().width,1);
+		separator.setBackground(Color.LIGHT_GRAY);
+		add(separator);
+		
+		JLabel jlTitle = new JLabel("                                                           Consumer-Producer Project");
+		jlTitle.setBounds(110,0,650,100);
+		jlTitle.setFont(new Font("SansSerif", Font.TRUETYPE_FONT, 20));
+		jlTitle.setForeground(new Color(115,115,115));
 		add(jlTitle);
 		
-		// Title names
-		JLabel jlBottom = new JLabel("Kevin O. Cabrera A01227157  Valentin Ochoa A01227157");
-		jlBottom.setBounds(400, 20, 650, 100);
-		jlBottom.setFont(new Font("Helvetica", Font.TRUETYPE_FONT, 14));
-		jlBottom.setForeground(Colors.white);
-		add(jlBottom);
+		JLabel jlTitleIcon = new JLabel();
+		jlTitleIcon.setBounds(40,0,60,100);
+		jlTitleIcon.setBackground(new Color(220, 220, 220));
+		jlTitleIcon.setIcon(new CustomImageIcon("/Images/programmer.png", "programmer", 60, 60));
+		add(jlTitleIcon);
 	}
 	
 	@Override
 	public void setSize(int width, int height) {
 		super.setSize(width, height);
+		
+		separator.setSize(width, separator.getBounds().height);
+
 	}
 }

@@ -9,6 +9,8 @@ import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import GraphicImage.CustomImageIcon;
+
 public class BootstrapPanel extends JPanel{
 	
 	private static final long serialVersionUID = 1L;
@@ -16,10 +18,12 @@ public class BootstrapPanel extends JPanel{
 	private JLabel label;
 	
 	private String description;
+	private String iconPath;
 	private int height;
 	
 	public BootstrapPanel(String iconPath, String description){
 		setBackground(new Color(201, 208, 232));
+		this.iconPath = iconPath;
 		this.description = description;
 		setLayout(null);
 		
@@ -44,6 +48,8 @@ public class BootstrapPanel extends JPanel{
 		label.setBackground(new Color(220, 220, 220));
 		label.setHorizontalAlignment(JLabel.CENTER);
 		add(label);
+		
+		setIcon(iconPath);
 	}
 	
 	@Override
@@ -58,6 +64,10 @@ public class BootstrapPanel extends JPanel{
 	
 	public void setText(String newText){
 		textField.setText(newText);
+	}
+	
+	public void setIcon(String iconPath){
+		label.setIcon(new CustomImageIcon(iconPath, description, (height / 2), (height / 2)));
 	}
 	
 	@Override
