@@ -46,6 +46,7 @@ public class MainPanel extends JFrame implements ActionListener {
 	// Bootstrap Panel
 	private BootstrapPanel noConsumers, timeProducers, numProducers, timeConsumers, bufferSize, minValues, maxValues;
 
+
 	// Buffer related
 	private Buffer buffer;
 

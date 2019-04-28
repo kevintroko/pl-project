@@ -37,14 +37,14 @@ public class Producer extends Thread {
            dashboard.addElementToRemainingList("Producer produced: " + product);
            try {
                Thread.sleep(sleepTime);
-           } catch(InterruptedException e) {
-                Logger.getLogger(Buffer.class.getName()).log(Level.SEVERE, null, e);
+           } catch(InterruptedException interruptedException) {
+               System.out.println("PRODUCED TO FULL BUFFER!");
            }
        }
     }
-    
+
     public void setCancel() {
     	this.isStart = false;
     }
-    
+
 }
