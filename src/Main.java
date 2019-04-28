@@ -1,6 +1,6 @@
 import Screen.MainPanel;
 
-/* Author @Kevintroko */
+/** @Author Kevin Cabrera */
 
 public class Main {
     // Creates a new panel and set it visible

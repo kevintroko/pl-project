@@ -19,7 +19,6 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
 import GraphicComponents.BootstrapPanel;
-import GraphicPanels.TitlePanel;
 import Main.Colors;
 import Main.Fonts;
 import Multithreading.Buffer;
@@ -27,6 +26,7 @@ import Multithreading.Consumer;
 import Multithreading.Producer;
 
 /** @Author Kevin O. Cabrera */
+/** @Author Valentin Ochoa */
 
 public class MainPanel extends JFrame implements ActionListener {
 
@@ -253,13 +253,13 @@ public class MainPanel extends JFrame implements ActionListener {
 		int x2 = x + width + 50;
 
 		// Instantiate
-		minValues = new BootstrapPanel(null, "Min value (0-9)");
-		maxValues = new BootstrapPanel(null, "Max value (0-9)");
-		bufferSize = new BootstrapPanel(null, "Buffer Size");
-		noConsumers = new BootstrapPanel(null, "# of Consumers");
-		numProducers = new BootstrapPanel(null, "# of Producers");
-		timeProducers = new BootstrapPanel(null, "Time to produce (ms)");
-		timeConsumers = new BootstrapPanel(null, "Time to consume (ms)");
+		minValues = new BootstrapPanel("Min value (0-9)");
+		maxValues = new BootstrapPanel("Max value (0-9)");
+		bufferSize = new BootstrapPanel("Buffer Size");
+		noConsumers = new BootstrapPanel("# of Consumers");
+		numProducers = new BootstrapPanel("# of Producers");
+		timeProducers = new BootstrapPanel("Time to produce (ms)");
+		timeConsumers = new BootstrapPanel("Time to consume (ms)");
 
 		bufferSize.setBounds(x, 0, (width * 2 + width / 10), height);
 		numProducers.setBounds(x, (y + -y * 2), width, height);

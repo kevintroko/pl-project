@@ -2,6 +2,8 @@ package Main;
 
 import java.awt.Color;
 
+/** @Author Kevin Cabrera */
+
 public class Colors {
 	// Colors definition
 	public static Color blue  = new Color(0,191,255);	 

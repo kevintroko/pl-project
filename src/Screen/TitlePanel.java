@@ -1,4 +1,4 @@
-package GraphicPanels;
+package Screen;
 
 import java.awt.Rectangle;
 
@@ -9,7 +9,7 @@ import javax.swing.JSeparator;
 import Main.Colors;
 import Main.Fonts;
 
-/* @Author Kevin O. */
+/** @Author Kevin Cabrera */
 
 public class TitlePanel extends JPanel {
 	private static final long serialVersionUID = 1L;
