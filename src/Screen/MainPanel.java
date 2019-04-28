@@ -9,14 +9,7 @@ import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
 import java.util.ArrayList;
 
-import javax.swing.DefaultListModel;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JList;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
+import javax.swing.*;
 
 import GraphicComponents.BootstrapPanel;
 import GraphicPanels.TitlePanel;
@@ -62,6 +55,9 @@ public class MainPanel extends JFrame implements ActionListener {
 
 	// JScroll
 	private JScrollPane completedOpsPanel, remainingOpsPanel;
+
+	//JProgressBar
+	private JProgressBar bufferBar;
 
 	// Labels
 	private JLabel remaining, completed, completedCounter, remainingCounter, remainingDividedByBufferSize,
@@ -244,6 +240,10 @@ public class MainPanel extends JFrame implements ActionListener {
 		content.add(btnStop);
 	}
 
+	public void createBufferBar(){
+		this.bufferBar = new JProgressBar();
+	}
+
 	// Create Text Inputs and Set Sizes
 	public void createBootstrapComponents() {
 		// Set Sizes
@@ -327,7 +327,7 @@ public class MainPanel extends JFrame implements ActionListener {
 					int m = Integer.parseInt(maxValues.getText());
 
 					if (producersQuantity <= 0 || consumersQuantity <= 0 || waitTimeProducers <= 0
-							|| waitTimeConsumers <= 0 || bufferLength <= 0 || n <= 0 || m <= 0) {
+							|| waitTimeConsumers <= 0 || bufferLength <= 0 ) {
 						JOptionPane.showMessageDialog(null, "Type only Integer positive digits");
 
 					} else {
