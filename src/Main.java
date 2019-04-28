@@ -1,5 +1,3 @@
-package Main;
-
 import Screen.MainPanel;
 
 /* Author @Kevintroko */
