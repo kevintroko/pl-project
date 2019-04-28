@@ -8,6 +8,7 @@ import java.util.concurrent.locks.ReentrantLock;
 
 import Screen.MainPanel;
 
+/** @Author Valentin Ochoa */
 
 public class Buffer {
 

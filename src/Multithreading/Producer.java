@@ -5,6 +5,7 @@ import java.util.logging.Logger;
 
 import Screen.MainPanel;
 
+/** @Author Valentin Ochoa */
 
 public class Producer extends Thread {
     

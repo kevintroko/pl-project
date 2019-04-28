@@ -12,7 +12,6 @@ import java.util.ArrayList;
 import javax.swing.*;
 
 import GraphicComponents.BootstrapPanel;
-import GraphicPanels.TitlePanel;
 import Main.Colors;
 import Main.Fonts;
 import Multithreading.Buffer;
@@ -20,6 +19,7 @@ import Multithreading.Consumer;
 import Multithreading.Producer;
 
 /** @Author Kevin O. Cabrera */
+/** @Author Valentin Ochoa */
 
 public class MainPanel extends JFrame implements ActionListener {
 
@@ -37,7 +37,11 @@ public class MainPanel extends JFrame implements ActionListener {
 	private TitlePanel titlePanel;
 
 	// Bootstrap Panel
-	private BootstrapPanel noConsumers, timeProducers, numProducers, timeConsumers, bufferSize, minValues, maxValues;
+	private BootstrapPanel noConsumers, 
+	timeProducers, 
+	numProducers, 
+	timeConsumers, 
+	bufferSize;
 
 
 	// Buffer related
@@ -147,7 +151,7 @@ public class MainPanel extends JFrame implements ActionListener {
 		remainingDividedByBufferSizeLabel.setForeground(Colors.dark_gray);
 
 		// Remaining Label
-		remainingDividedByBufferSize = new JLabel("00/00");
+		remainingDividedByBufferSize = new JLabel("0/0");
 		remainingDividedByBufferSize.setBounds(x + 50 + width / 2, y * 2 + 50, width, height);
 		remainingDividedByBufferSize.setFont(Fonts.helv_20_bold);
 		remainingDividedByBufferSize.setForeground(Colors.dark_gray);
@@ -254,25 +258,19 @@ public class MainPanel extends JFrame implements ActionListener {
 		int x2 = x + width + 50;
 
 		// Instantiate
-		minValues = new BootstrapPanel(null, "Min value (0-9)");
-		maxValues = new BootstrapPanel(null, "Max value (0-9)");
-		bufferSize = new BootstrapPanel(null, "Buffer Size");
-		noConsumers = new BootstrapPanel(null, "# of Consumers");
-		numProducers = new BootstrapPanel(null, "# of Producers");
-		timeProducers = new BootstrapPanel(null, "Time to produce (ms)");
-		timeConsumers = new BootstrapPanel(null, "Time to consume (ms)");
+		bufferSize = new BootstrapPanel("Buffer Size");
+		noConsumers = new BootstrapPanel("# of Consumers");
+		numProducers = new BootstrapPanel("# of Producers");
+		timeProducers = new BootstrapPanel("Time to produce (ms)");
+		timeConsumers = new BootstrapPanel("Time to consume (ms)");
 
 		bufferSize.setBounds(x, 0, (width * 2 + width / 10), height);
 		numProducers.setBounds(x, (y + -y * 2), width, height);
 		noConsumers.setBounds(x2, (y + -y * 2), width, height);
 		timeProducers.setBounds(x, (y + -y * 3), width, height);
 		timeConsumers.setBounds(x2, (y + -y * 3), width, height);
-		minValues.setBounds(x, (y + -y * 4), width, height);
-		maxValues.setBounds(x2, (y + -y * 4), width, height);
 
 		// Add Components
-		content.add(maxValues);
-		content.add(minValues);
 		content.add(bufferSize);
 		content.add(noConsumers);
 		content.add(numProducers);
@@ -323,16 +321,16 @@ public class MainPanel extends JFrame implements ActionListener {
 					int bufferLength = Integer.parseInt(bufferSize.getText());
 					buffer = new Buffer(bufferLength, MainPanel.this);
 
-					int n = Integer.parseInt(minValues.getText());
-					int m = Integer.parseInt(maxValues.getText());
-
-					if (producersQuantity <= 0 || consumersQuantity <= 0 || waitTimeProducers <= 0
-							|| waitTimeConsumers <= 0 || bufferLength <= 0 ) {
-						JOptionPane.showMessageDialog(null, "Type only Integer positive digits");
-
+					// Check for zeros and max values
+					if ((producersQuantity <= 0 && producersQuantity < 10) ||
+						(consumersQuantity <= 0 && consumersQuantity < 10) || 
+						(waitTimeProducers <= 0 && waitTimeProducers <= 10000) ||
+						(waitTimeConsumers <= 0 && waitTimeConsumers <= 10000)  ||
+						bufferLength <= 0) {
+						JOptionPane.showMessageDialog(null, "Type only values in the accepted range");
 					} else {
 						new Thread(() -> {
-							createProducer(producersQuantity, waitTimeProducers, n, m, waitTimeProducers);
+							createProducer(producersQuantity, waitTimeProducers, waitTimeProducers);
 						}).start();
 
 						new Thread(() -> {
@@ -360,7 +358,7 @@ public class MainPanel extends JFrame implements ActionListener {
 		});
 	}
 
-	public boolean createProducer(int sizeProducers, int timeProducers, int n, int m, int sleepTime) {
+	public boolean createProducer(int sizeProducers, int timeProducers, int sleepTime) {
 		while (sizeProducers != 0) {
 			Producer producer = new Producer(buffer, this, sleepTime);
 			producers.add(producer);
@@ -390,7 +388,6 @@ public class MainPanel extends JFrame implements ActionListener {
 			}
 			sizeConsumers--;
 		}
-
 		return sizeConsumers == 0 ? true : false;
 	}
 

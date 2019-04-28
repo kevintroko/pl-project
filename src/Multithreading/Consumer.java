@@ -2,6 +2,8 @@ package Multithreading;
 
 import Screen.MainPanel;
 
+/** @Author Valentin Ochoa */
+
 public class Consumer extends Thread {
 	private long waitTime;
 	private MainPanel dashboard;
