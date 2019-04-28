@@ -6,64 +6,74 @@ import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
-import Screen.MainPanel;
+import Screen.Dashboard;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-//TODO Refactor this
- public class Buffer {
-    private int bufferLength,
-    			consumerOperations, 
-    			producerOperations;    
-    private Queue<String> bufferStorage;
+
+public class Buffer {
+
+    private Queue<String> storage;
+
     private Lock lock = new ReentrantLock();
-    private Condition notFull = lock.newCondition();
-    private Condition notEmpty = lock.newCondition();
-    private MainPanel mainPanel;
-    
-    public Buffer(int length, MainPanel mainPanel) {
-        this.bufferStorage = new LinkedList<String>();
-        this.mainPanel = mainPanel;
-        this.bufferLength = length;
-        this.consumerOperations = 0;
-        this.producerOperations = 0;
+    private Condition bufferNotFull = lock.newCondition();
+    private Condition bufferNotEmpty = lock.newCondition();
+
+    private int bufferSize;
+    private int numberOfConsumerOperations;
+    private int numberOfProducerOperations;
+
+    private Dashboard dashboard;
+
+    public Buffer(int size, Dashboard dashboard) {
+        // this.storage = new LinkedList<>(Arrays.asList(new String[length]));
+
+        this.storage = new LinkedList<String>();
+        this.bufferSize = size;
+        this.dashboard = dashboard;
+
+        this.numberOfConsumerOperations = 0;
+        this.numberOfProducerOperations = 0;
     }
-    
-    public String consume() throws InterruptedException {
-    	System.out.println(bufferStorage.size());
-    	lock.lock();
-    	try {
-	         while(this.bufferStorage.isEmpty()) {
-	        	 notEmpty.await();
-	         }
-	         String product = this.bufferStorage.poll();
-		     consumerOperations++;
-		     producerOperations--;
-		     mainPanel.addRemainingCounter(producerOperations);
-	         mainPanel.addCompletedCounter(consumerOperations);
-	         notFull.signal();
-		     return product;
-    	} finally {
-			 lock.unlock();
-    	}    
-    }
-    
+
     public void produce(String product) throws InterruptedException {
-    	lock.lock();
+        lock.lock();
         try {
-            while(this.bufferLength == this.bufferStorage.size()) {
-                notFull.await();
+            while (this.bufferSize == this.storage.size()) {
+                bufferNotFull.await();
             }
-            this.bufferStorage.add(product);
-            producerOperations++;
-            mainPanel.addRemainingCounter(producerOperations);
-            mainPanel.addRemainingDividedByBufferSize(producerOperations, bufferLength);
-            notEmpty.signal();
+            this.storage.add(product);
+            numberOfProducerOperations++;
+            dashboard.addRemainingCounter(numberOfProducerOperations);
+            dashboard.addRemainingDividedByBufferSize(numberOfProducerOperations, bufferSize);
+            bufferNotEmpty.signal();
+        } finally {
+            try {
+                lock.unlock();
+            }
+            catch (IllegalMonitorStateException e){
+                System.out.println("already unlocked");
+            }
+        }
+    }
+
+    public String consume() throws InterruptedException {
+        lock.lock();
+
+        try {
+            while (this.storage.isEmpty()) {
+                bufferNotEmpty.await();
+            }
+            dashboard.addRemainingCounter(numberOfProducerOperations --);
+            dashboard.addCompletedCounter(numberOfConsumerOperations ++);
+
+            String product = this.storage.poll();
+
+            bufferNotFull.signal();
+
+            return product;
         } finally {
             lock.unlock();
-        }  
-    }    
+        }
+    }
+
+
 }
