@@ -18,7 +18,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
-import GraphicComponents.BootstrapPanel;
+import GraphicComponents.CustomPanel;
 import Main.Colors;
 import Main.Fonts;
 import Multithreading.Buffer;
@@ -44,7 +44,7 @@ public class MainPanel extends JFrame implements ActionListener {
 	private TitlePanel titlePanel;
 
 	// Bootstrap Panel
-	private BootstrapPanel noConsumers, 
+	private CustomPanel noConsumers, 
 	timeProducers, 
 	numProducers, 
 	timeConsumers, 
@@ -145,7 +145,7 @@ public class MainPanel extends JFrame implements ActionListener {
 		int width = 200;
 		int height = 100;
 		int x = 850;
-		int y = 120;
+		int y = 80;
 
 		// Remaining division Label
 		remainingDividedByBufferSizeLabel = new JLabel("Remaining/Buffer Size");
@@ -166,10 +166,12 @@ public class MainPanel extends JFrame implements ActionListener {
 
 	// Set Remaining Tasks Component
 	public void addRemainingOpsPanel() {
-		/** @Todo move remaining to visible place */
+		int x = 100;
+		int y = 180;
+		
 		// Remaining Label
 		remaining = new JLabel("Remaining tasks");
-		remaining.setBounds(100, 220, 150, 100);
+		remaining.setBounds(x, y, 150, 100);
 		remaining.setFont(Fonts.helv_15);
 		remaining.setForeground(Colors.dark_gray);
 
@@ -178,11 +180,11 @@ public class MainPanel extends JFrame implements ActionListener {
 		// Remaining Task List Panel
 		listRemainingOps = new JList<>(modelRemainingTasks);
 		remainingOpsPanel = new JScrollPane(listRemainingOps);
-		remainingOpsPanel.setBounds(100, 280, 400, 160);
+		remainingOpsPanel.setBounds(x, y + 60, 400, 160);
 
 		// Remaining List Results
 		remainingCounter = new JLabel();
-		remainingCounter.setBounds(220, 220, 400, 100);
+		remainingCounter.setBounds(x, y, 400, 100);
 		remainingCounter.setFont(Fonts.helv_15);
 		remainingCounter.setForeground(Colors.dark_gray);
 
@@ -196,10 +198,11 @@ public class MainPanel extends JFrame implements ActionListener {
 	public void addCompletedOpsPanel() {
 
 		int x = 540;
+		int y = 180;
 
 		// Completed Label
 		completed = new JLabel("Completed tasks");
-		completed.setBounds(x, 220, 150, 100);
+		completed.setBounds(x, y, 150, 100);
 		completed.setFont(Fonts.helv_15);
 		completed.setForeground(Colors.dark_gray);
 
@@ -208,11 +211,11 @@ public class MainPanel extends JFrame implements ActionListener {
 
 		// Completed Scroll
 		completedOpsPanel = new JScrollPane(listCompletedOps);
-		completedOpsPanel.setBounds(x, 280, 400, 160);
+		completedOpsPanel.setBounds(x, y + 60, 400, 160);
 
 		// Completed Counter Label
 		completedCounter = new JLabel();
-		completedCounter.setBounds(x + 130, 220, 400, 100);
+		completedCounter.setBounds(x + 130, y, 400, 100);
 		completedCounter.setFont(Fonts.helv_15);
 		completedCounter.setForeground(Colors.dark_gray);
 
@@ -257,11 +260,11 @@ public class MainPanel extends JFrame implements ActionListener {
 		int x2 = x + width + 50;
 
 		// Instantiate
-		bufferSize = new BootstrapPanel("Buffer Size");
-		noConsumers = new BootstrapPanel("# of Consumers");
-		numProducers = new BootstrapPanel("# of Producers");
-		timeProducers = new BootstrapPanel("Time to produce (ms)");
-		timeConsumers = new BootstrapPanel("Time to consume (ms)");
+		bufferSize = new CustomPanel("Buffer Size");
+		noConsumers = new CustomPanel("# of Consumers");
+		numProducers = new CustomPanel("# of Producers");
+		timeProducers = new CustomPanel("Time to produce (ms)");
+		timeConsumers = new CustomPanel("Time to consume (ms)");
 
 		bufferSize.setBounds(x, 0, (width * 2 + width / 10), height);
 		numProducers.setBounds(x, (y + -y * 2), width, height);
