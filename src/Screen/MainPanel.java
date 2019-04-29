@@ -256,16 +256,17 @@ public class MainPanel extends JFrame implements ActionListener {
 	public void createBufferBar(){
 		int x = 100;
 		int y = 420;
-		int width = (this.getWidth() - 120);
-		int height = 20;
+		int width = 1050;
+		int height = 30;
 		
-		this.bufferBar = new JProgressBar();
-		this.bufferBar.setValue(0);
-		this.bufferBar.setStringPainted(true);
+		bufferBar = new JProgressBar();
+		bufferBar.setBackground(new Color(10,10,10));
+		bufferBar.setValue(0);
+		bufferBar.setStringPainted(true);
+		bufferBar.setBorderPainted(true);
 
-		this.bufferBar.setBorderPainted(true);
-		this.bufferBar.setBounds(x ,y , width, height);
-
+		bufferBar.setBounds(x ,y , width, height);
+		
 		content.add(this.bufferBar);
 	}
 
@@ -363,15 +364,13 @@ public class MainPanel extends JFrame implements ActionListener {
 					
 					
 					// Check for zeros and max values;
-					if ((producersQuantity <= 0 && producersQuantity <= 10) ||
-						(consumersQuantity <= 0 && consumersQuantity <= 10) || 
-						(waitTimeProducers <= 0 && waitTimeProducers <= 10000)  ||
-						(waitTimeConsumers <= 0 && waitTimeConsumers <= 10000)  || 
-						bufferLength <= 0 && bufferLength <= 100) {
+					if ((producersQuantity <= 0 || producersQuantity > 10) ||
+						(consumersQuantity <= 0 || consumersQuantity > 10) || 
+						(waitTimeProducers <= 0 || waitTimeProducers > 10000)  ||
+						(waitTimeConsumers <= 0 || waitTimeConsumers > 10000)  || 
+						bufferLength <= 0 || bufferLength > 100) {
 						JOptionPane.showMessageDialog(null, "Type only values in the accepted range");
 					} else {
-						System.out.println("Hey");
-						System.out.println(producersQuantity);
 						new Thread(() -> {
 							createProducer(producersQuantity, waitTimeProducers, waitTimeProducers);
 						}).start();
