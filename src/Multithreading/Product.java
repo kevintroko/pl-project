@@ -2,6 +2,7 @@ package Multithreading;
 
 import java.util.Random;
 
+/** @Author Valentin Ochoa */
 
 public class Product {
    final char[] SCHEME_OPERATIONS = {'+', '-', '*', '/'};

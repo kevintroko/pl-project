@@ -8,6 +8,7 @@ import java.util.concurrent.locks.ReentrantLock;
 
 import Screen.MainPanel;
 
+/** @Author Valentin Ochoa */
 
 public class Buffer {
 
@@ -43,7 +44,9 @@ public class Buffer {
             this.storage.add(product);
             numberOfProducerOperations++;
             dashboard.addRemainingCounter(numberOfProducerOperations);
-            dashboard.addRemainingDividedByBufferSize(numberOfProducerOperations, bufferSize);
+            dashboard.addremainingBuffer(numberOfProducerOperations, bufferSize);
+            dashboard.setBufferBarValue(numberOfProducerOperations, bufferSize);
+
             bufferNotEmpty.signal();
         } finally {
             try {

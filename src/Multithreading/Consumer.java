@@ -2,25 +2,26 @@ package Multithreading;
 
 import Screen.MainPanel;
 
+/** @Author Valentin Ochoa */
 
 public class Consumer extends Thread {
 	private long waitTime;
 	private MainPanel dashboard;
     private Buffer buffer;
-
+	private boolean isStart;
     
     public Consumer(Buffer buffer, MainPanel dashboard, int waitTime) {
         this.buffer = buffer;
         this.waitTime = waitTime;
         this.dashboard = dashboard;
+        this.isStart = true;
     }
     
     @Override
     public void run() {
-
 		String product;
         
-        while (true) {
+        while (isStart) {
             try {
 				product = this.buffer.consume();
 			
@@ -64,5 +65,8 @@ public class Consumer extends Thread {
 		}
 		return resultAsFloat;
 
+	}
+	public void setCancel(){
+    	this.isStart = false;
 	}
 }

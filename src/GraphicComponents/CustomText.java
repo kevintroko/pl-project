@@ -7,28 +7,28 @@ import java.awt.RenderingHints;
 import javax.swing.JTextField;
 import javax.swing.text.Document;
 
-public class BootstrapTextField extends JTextField {
+public class CustomText extends JTextField {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
     private String placeholder;
 
-    public BootstrapTextField() {
-    	
+    public CustomText() {
+
     }
 
-    public BootstrapTextField(final Document pDoc, final String pText, final int pColumns){
+    public CustomText(final Document pDoc, final String pText, final int pColumns) {
         super(pDoc, pText, pColumns);
     }
 
-    public BootstrapTextField(final int pColumns) {
+    public CustomText(final int pColumns) {
         super(pColumns);
     }
 
-    public BootstrapTextField(final String pText) {
+    public CustomText(final String pText) {
         super(pText);
     }
 
-    public BootstrapTextField(final String pText, final int pColumns) {
+    public CustomText(final String pText, final int pColumns) {
         super(pText, pColumns);
     }
 
@@ -45,11 +45,11 @@ public class BootstrapTextField extends JTextField {
         }
 
         final Graphics2D g = (Graphics2D) pG;
-        g.setRenderingHint(RenderingHints.KEY_ANTIALIASING,RenderingHints.VALUE_ANTIALIAS_ON);
+        g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         g.setColor(getDisabledTextColor());
-        
+
         int auxY = ((getBounds().height - pG.getFontMetrics().getHeight()) / 2);
-        
+
         g.drawString(placeholder, 10, pG.getFontMetrics().getMaxAscent() + auxY);
     }
 
