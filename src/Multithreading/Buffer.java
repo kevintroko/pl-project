@@ -44,6 +44,8 @@ public class Buffer {
             numberOfProducerOperations++;
             dashboard.addRemainingCounter(numberOfProducerOperations);
             dashboard.addRemainingDividedByBufferSize(numberOfProducerOperations, bufferSize);
+            dashboard.setBufferBarValue(numberOfProducerOperations, bufferSize);
+
             bufferNotEmpty.signal();
         } finally {
             try {
