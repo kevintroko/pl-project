@@ -62,8 +62,13 @@ public class MainPanel extends JFrame implements ActionListener {
 	private JProgressBar bufferBar;
 
 	// Labels
-	private JLabel remaining, completed, completedCounter, remainingCounter, remainingDividedByBufferSize,
-			remainingDividedByBufferSizeLabel;
+	private JLabel remaining, completed, 
+	completedCounter, remainingCounter, 
+	remainingBuffer, remainDivBuffer;
+	
+	// Lables for Inputs
+	private JLabel lBuff, lProd, 
+	lCons, lTimeProd, lTimeCons;
 
 	public MainPanel() {
 		super("Programming Languages");
@@ -128,8 +133,8 @@ public class MainPanel extends JFrame implements ActionListener {
 		leadContainer.add(content);
 
 		// Call function
-		createBootstrapComponents();
-		createBootstrapButtons();
+		createComponents();
+		createButtons();
 		addRemainingOpsPanel();
 		addCompletedOpsPanel();
 		remainingDividedByBuffer();
@@ -138,32 +143,29 @@ public class MainPanel extends JFrame implements ActionListener {
 
 	// Set Remaining v.s. Buffer Component
 	public void remainingDividedByBuffer() {
-		int width = 200;
+		int width  = 200;
 		int height = 100;
-		int x = 850;
-		int y = 80;
 
 		// Remaining division Label
-		remainingDividedByBufferSizeLabel = new JLabel("Remaining/Buffer Size");
-		remainingDividedByBufferSizeLabel.setBounds(x + width / 2, y + height, width, height);
-		remainingDividedByBufferSizeLabel.setFont(Fonts.helv_15);
-		remainingDividedByBufferSizeLabel.setForeground(Colors.dark_gray);
+		remainDivBuffer = new JLabel("Remaining / Buffer Size");
+		remainDivBuffer.setBounds(100, 360, width, height);
+		remainDivBuffer.setFont(Fonts.helv_15);
+		remainDivBuffer.setForeground(Colors.dark_gray);
 
 		// Remaining Label
-		remainingDividedByBufferSize = new JLabel("0/0");
-		remainingDividedByBufferSize.setBounds(x + 50 + width / 2, y * 2 + 50, width, height);
-		remainingDividedByBufferSize.setFont(Fonts.helv_20_bold);
-		remainingDividedByBufferSize.setForeground(Colors.dark_gray);
+		remainingBuffer = new JLabel("0/0");
+		remainingBuffer.setBounds(0, 0, 0, 0);
+		remainingBuffer.setFont(Fonts.helv_20_bold);
+		remainingBuffer.setForeground(Colors.dark_gray);
 
 		// Add components
-		content.add(remainingDividedByBufferSize);
-		content.add(remainingDividedByBufferSizeLabel);
+		content.add(remainDivBuffer);
 	}
 
 	// Set Remaining Tasks Component
 	public void addRemainingOpsPanel() {
 		int x = 100;
-		int y = 180;
+		int y = 160;
 		
 		// Remaining Label
 		remaining = new JLabel("Remaining tasks");
@@ -176,11 +178,11 @@ public class MainPanel extends JFrame implements ActionListener {
 		// Remaining Task List Panel
 		listRemainingOps = new JList<>(modelRemainingTasks);
 		remainingOpsPanel = new JScrollPane(listRemainingOps);
-		remainingOpsPanel.setBounds(x, y + 60, 400, 160);
+		remainingOpsPanel.setBounds(x, y + 60, 500, 160);
 
 		// Remaining List Results
 		remainingCounter = new JLabel();
-		remainingCounter.setBounds(x * 2 + 20, y, 400, 100);
+		remainingCounter.setBounds(x * 2 + 20, y, 500, 100);
 		remainingCounter.setFont(Fonts.helv_15);
 		remainingCounter.setForeground(Colors.dark_gray);
 
@@ -192,9 +194,8 @@ public class MainPanel extends JFrame implements ActionListener {
 
 	// Completed Task Component
 	public void addCompletedOpsPanel() {
-
-		int x = 540;
-		int y = 180;
+		int x = 650;
+		int y = 160;
 
 		// Completed Label
 		completed = new JLabel("Completed tasks");
@@ -207,11 +208,11 @@ public class MainPanel extends JFrame implements ActionListener {
 
 		// Completed Scroll
 		completedOpsPanel = new JScrollPane(listCompletedOps);
-		completedOpsPanel.setBounds(x, y + 60, 400, 160);
+		completedOpsPanel.setBounds(x, y + 60, 500, 160);
 
 		// Completed Counter Label
 		completedCounter = new JLabel();
-		completedCounter.setBounds(x + 130, y, 400, 100);
+		completedCounter.setBounds(x + 130, y, 500, 100);
 		completedCounter.setFont(Fonts.helv_15);
 		completedCounter.setForeground(Colors.dark_gray);
 
@@ -222,13 +223,18 @@ public class MainPanel extends JFrame implements ActionListener {
 	}
 
 	// Buttons
-	public void createBootstrapButtons() {
+	public void createButtons() {
+		int x = 100;
+		int y = 460;
+		int height = 50;
+		int width = 520;
+		
 		btnStart = new JButton("Start");
-		btnStop = new JButton("Stop");
+		btnStop  = new JButton("Stop");
 
 		// Button start style
 		btnStart.setOpaque(true);
-		btnStart.setBounds(100, 460, 520, 50);
+		btnStart.setBounds(x, y, width, height);
 		btnStart.setBackground(Colors.blue);
 		btnStart.setForeground(Colors.white);
 		btnStart.setFont(Fonts.helv_15_bold);
@@ -236,7 +242,7 @@ public class MainPanel extends JFrame implements ActionListener {
 
 		// Button stop style
 		btnStop.setOpaque(true);
-		btnStop.setBounds(630, 460, 520, 50);
+		btnStop.setBounds(630, y, width, height);
 		btnStop.setBackground(Colors.red);
 		btnStop.setForeground(Colors.white);
 		btnStop.setFont(Fonts.helv_15_bold);
@@ -246,32 +252,45 @@ public class MainPanel extends JFrame implements ActionListener {
 		content.add(btnStop);
 	}
 
+	// Progress Bar
 	public void createBufferBar(){
+		int x = 100;
+		int y = 420;
+		int width = (this.getWidth() - 120);
+		int height = 20;
+		
 		this.bufferBar = new JProgressBar();
 		this.bufferBar.setValue(0);
 		this.bufferBar.setStringPainted(true);
 
 		this.bufferBar.setBorderPainted(true);
-		this.bufferBar.setBounds(725,400,500,50);
+		this.bufferBar.setBounds(x ,y , width, height);
 
 		content.add(this.bufferBar);
 	}
 
 	// Create Text Inputs and Set Sizes
-	public void createBootstrapComponents() {
+	public void createComponents() {
 		// Set Sizes
-		int width = 500;
+		int width  = 500;
 		int height = 40;
-		int y = -70;
-		int x = 100;
-		int x2 = x + width + 50;
+		int y      = -70;
+		int x      = 100;
+		int x2     = x + width + 50;
 
 		// Instantiate
-		bufferSize = new CustomPanel("Buffer Size");
-		noConsumers = new CustomPanel("# of Consumers");
-		numProducers = new CustomPanel("# of Producers");
+		bufferSize    = new CustomPanel("Buffer Size");
+		noConsumers   = new CustomPanel("# of Consumers");
+		numProducers  = new CustomPanel("# of Producers");
 		timeProducers = new CustomPanel("Time to produce (ms)");
 		timeConsumers = new CustomPanel("Time to consume (ms)");
+		
+		// Labels 
+		lBuff = new JLabel("Buffer Size [1-10]");
+		lProd = new JLabel("Number of Producers [1-10]");
+		lCons = new JLabel("Number of Consumers [1-10]");
+		lTimeProd = new JLabel("Time to produce (ms) [1-10,000]"); 
+		lTimeCons = new JLabel("Time to produce (ms) [1-10,000]");
 
 		bufferSize.setBounds(x, 0, (width * 2 + width / 10), height);
 		numProducers.setBounds(x, (y + -y * 2), width, height);
@@ -279,12 +298,24 @@ public class MainPanel extends JFrame implements ActionListener {
 		timeProducers.setBounds(x, (y + -y * 3), width, height);
 		timeConsumers.setBounds(x2, (y + -y * 3), width, height);
 
+		lBuff.setBounds(x, -30, (width * 2 + width / 10), height);
+		lProd.setBounds(x, (y + -y * 2) - 30, width, height);
+		lCons.setBounds(x2, (y + -y * 2) - 30, width, height);
+		lTimeProd.setBounds(x, (y + -y * 3) - 30, width, height);
+		lTimeCons.setBounds(x2, (y + -y * 3) -30, width, height);
+
 		// Add Components
 		content.add(bufferSize);
 		content.add(noConsumers);
 		content.add(numProducers);
 		content.add(timeConsumers);
 		content.add(timeProducers);
+		
+		content.add(lBuff);
+		content.add(lProd);
+		content.add(lCons);
+		content.add(lTimeProd);
+		content.add(lTimeCons);
 	}
 
 	// ----------- Element handling Section --------------
@@ -329,15 +360,18 @@ public class MainPanel extends JFrame implements ActionListener {
 
 					int bufferLength = Integer.parseInt(bufferSize.getText());
 					buffer = new Buffer(bufferLength, MainPanel.this);
-
-					// Check for zeros and max values
-					if ((producersQuantity <= 0 && producersQuantity < 10) ||
-						(consumersQuantity <= 0 && consumersQuantity < 10) || 
-						(waitTimeProducers <= 0 && waitTimeProducers <= 10000) ||
-						(waitTimeConsumers <= 0 && waitTimeConsumers <= 10000)  ||
-						bufferLength <= 0) {
+					
+					
+					// Check for zeros and max values;
+					if ((producersQuantity <= 0 && producersQuantity <= 10) ||
+						(consumersQuantity <= 0 && consumersQuantity <= 10) || 
+						(waitTimeProducers <= 0 && waitTimeProducers <= 10000)  ||
+						(waitTimeConsumers <= 0 && waitTimeConsumers <= 10000)  || 
+						bufferLength <= 0 && bufferLength <= 100) {
 						JOptionPane.showMessageDialog(null, "Type only values in the accepted range");
 					} else {
+						System.out.println("Hey");
+						System.out.println(producersQuantity);
 						new Thread(() -> {
 							createProducer(producersQuantity, waitTimeProducers, waitTimeProducers);
 						}).start();
@@ -381,7 +415,6 @@ public class MainPanel extends JFrame implements ActionListener {
 			}
 			sizeProducers--;
 		}
-
 		return sizeProducers == 0 ? true : false;
 	}
 
@@ -412,8 +445,8 @@ public class MainPanel extends JFrame implements ActionListener {
 		remainingCounter.setText("= " + remainingOps);
 	}
 
-	public void addRemainingDividedByBufferSize(int remainingOps, int bufferLength) {
-		remainingDividedByBufferSize.setText(remainingOps * 100/ bufferLength + "%");
+	public void addremainingBuffer(int remainingOps, int bufferLength) {
+		remainingBuffer.setText(remainingOps * 100/ bufferLength + "%");
 	}
 	public void setBufferBarValue(int remainingOps, int bufferLength){
 		this.bufferBar.setValue(remainingOps * 100/ bufferLength );

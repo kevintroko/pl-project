@@ -1,8 +1,5 @@
 package Multithreading;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 import Screen.MainPanel;
 
 /** @Author Valentin Ochoa */
