@@ -184,7 +184,7 @@ public class MainPanel extends JFrame implements ActionListener {
 
 		// Remaining List Results
 		remainingCounter = new JLabel();
-		remainingCounter.setBounds(x, y, 400, 100);
+		remainingCounter.setBounds(x * 2 + 20, y, 400, 100);
 		remainingCounter.setFont(Fonts.helv_15);
 		remainingCounter.setForeground(Colors.dark_gray);
 

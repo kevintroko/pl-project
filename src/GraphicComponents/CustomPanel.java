@@ -16,7 +16,7 @@ public class CustomPanel extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 	
-	private BootstrapTextField textField;
+	private CustomText textField;
 	private JLabel label;
 
 	private String description;
@@ -32,7 +32,7 @@ public class CustomPanel extends JPanel {
 	private void loadFormField() {
 		removeAll();
 		height = this.getHeight() - 4;
-		textField = new BootstrapTextField();
+		textField = new CustomText();
 		textField.setBounds(2, 2, getWidth() - 4, height);
 		textField.setBorder(BorderFactory.createEmptyBorder(5, 10, 5, 5));
 		textField.setFont(Fonts.helv_15);
