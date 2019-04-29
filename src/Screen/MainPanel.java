@@ -1,8 +1,6 @@
 package Screen;
 
-import java.awt.Component;
-import java.awt.Container;
-import java.awt.Rectangle;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ComponentEvent;
@@ -131,6 +129,7 @@ public class MainPanel extends JFrame implements ActionListener {
 		addRemainingOpsPanel();
 		addCompletedOpsPanel();
 		remainingDividedByBuffer();
+		createBufferBar();
 	}
 
 	// Set Remaining v.s. Buffer Component
@@ -242,6 +241,13 @@ public class MainPanel extends JFrame implements ActionListener {
 
 	public void createBufferBar(){
 		this.bufferBar = new JProgressBar();
+		this.bufferBar.setValue(0);
+		this.bufferBar.setStringPainted(true);
+
+		this.bufferBar.setBorderPainted(true);
+		this.bufferBar.setBounds(725,400,500,50);
+
+		content.add(this.bufferBar);
 	}
 
 	// Create Text Inputs and Set Sizes
@@ -407,6 +413,9 @@ public class MainPanel extends JFrame implements ActionListener {
 	}
 
 	public void addRemainingDividedByBufferSize(int remainingOps, int bufferLength) {
-		remainingDividedByBufferSize.setText(remainingOps + "/" + bufferLength);
+		remainingDividedByBufferSize.setText(remainingOps * 100/ bufferLength + "%");
+	}
+	public void setBufferBarValue(int remainingOps, int bufferLength){
+		this.bufferBar.setValue(remainingOps * 100/ bufferLength );
 	}
 }
