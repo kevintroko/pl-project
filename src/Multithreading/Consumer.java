@@ -24,11 +24,11 @@ public class Consumer extends Thread {
         while (isStart) {
             try {
 				product = this.buffer.consume();
-			
+				
             if (product != null) {
             	double result = getResult(product);
 	            dashboard.removeElementOfRemainingList();
-	            dashboard.addElementToCompletedList(product+"= "+result);
+	            dashboard.addElementToCompletedList("Consumer["+ this.getId() +"] " + product + "= " + result);
             	}
             } catch (InterruptedException interruptedException) {
 				interruptedException.printStackTrace();
