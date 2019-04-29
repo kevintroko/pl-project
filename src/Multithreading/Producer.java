@@ -32,7 +32,7 @@ public class Producer extends Thread {
         	   e1.printStackTrace();
            }
            System.out.println("Producer produced: " + product);
-           dashboard.addElementToRemainingList("Producer produced: " + product);
+           dashboard.addElementToRemainingList("Producer["+ this.getId() +"] produced: " + product);
            try {
                Thread.sleep(sleepTime);
            } catch(InterruptedException interruptedException) {
