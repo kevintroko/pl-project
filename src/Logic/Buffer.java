@@ -1,12 +1,13 @@
-package Multithreading;
+package Logic;
 
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
+import Screen.MainPanel;
 
-import Screen.Dashboard;
+/** @Author Valentin Ochoa */
 
 
 public class Buffer {
@@ -21,12 +22,12 @@ public class Buffer {
     private int numberOfConsumerOperations;
     private int numberOfProducerOperations;
 
-    private Dashboard dashboard;
 
-    public Buffer(int size, Dashboard dashboard) {
-        // this.storage = new LinkedList<>(Arrays.asList(new String[length]));
+    private MainPanel dashboard;
 
-        this.storage = new LinkedList<String>();
+    public Buffer(int size, MainPanel dashboard) {
+
+        this.storage = new LinkedList<>();
         this.bufferSize = size;
         this.dashboard = dashboard;
 
@@ -43,15 +44,13 @@ public class Buffer {
             this.storage.add(product);
             numberOfProducerOperations++;
             dashboard.addRemainingCounter(numberOfProducerOperations);
-            dashboard.addRemainingDividedByBufferSize(numberOfProducerOperations, bufferSize);
-            bufferNotEmpty.signal();
+
+            dashboard.addremainingBuffer(numberOfProducerOperations, bufferSize);
+            dashboard.setBufferBarValue(numberOfProducerOperations, bufferSize);
+
         } finally {
-            try {
+                bufferNotEmpty.signal();
                 lock.unlock();
-            }
-            catch (IllegalMonitorStateException e){
-                System.out.println("already unlocked");
-            }
         }
     }
 
@@ -62,15 +61,14 @@ public class Buffer {
             while (this.storage.isEmpty()) {
                 bufferNotEmpty.await();
             }
+            String product = this.storage.poll();
             dashboard.addRemainingCounter(numberOfProducerOperations --);
             dashboard.addCompletedCounter(numberOfConsumerOperations ++);
 
-            String product = this.storage.poll();
-
-            bufferNotFull.signal();
 
             return product;
         } finally {
+            bufferNotFull.signal();
             lock.unlock();
         }
     }

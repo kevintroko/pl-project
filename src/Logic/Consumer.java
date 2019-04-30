@@ -1,33 +1,34 @@
-package Multithreading;
+package Logic;
 
-import Screen.Dashboard;
+import Screen.MainPanel;
 
+/** @Author Valentin Ochoa */
 
 public class Consumer extends Thread {
 	private long waitTime;
-	private Dashboard dashboard;
+	private MainPanel dashboard;
     private Buffer buffer;
-
+	private boolean isStart;
     
-    public Consumer(Buffer buffer, Dashboard dashboard, int waitTime) {
+    public Consumer(Buffer buffer, MainPanel dashboard, int waitTime) {
         this.buffer = buffer;
         this.waitTime = waitTime;
         this.dashboard = dashboard;
+        this.isStart = true;
     }
     
     @Override
     public void run() {
-
 		String product;
         
-        while (true) {
+        while (isStart) {
             try {
 				product = this.buffer.consume();
-			
+				
             if (product != null) {
             	double result = getResult(product);
 	            dashboard.removeElementOfRemainingList();
-	            dashboard.addElementToCompletedList(product+"= "+result);
+	            dashboard.addElementToCompletedList("Consumer["+ this.getId() +"] " + product + "= " + result);
             	}
             } catch (InterruptedException interruptedException) {
 				interruptedException.printStackTrace();
@@ -64,5 +65,8 @@ public class Consumer extends Thread {
 		}
 		return resultAsFloat;
 
+	}
+	public void setCancel(){
+    	this.isStart = false;
 	}
 }

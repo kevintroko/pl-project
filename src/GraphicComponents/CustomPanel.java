@@ -9,87 +9,87 @@ import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-public class BootstrapPanel extends JPanel{
-	
+import Main.Colors;
+import Main.Fonts;
+
+public class CustomPanel extends JPanel {
+
 	private static final long serialVersionUID = 1L;
-	private BootstrapTextField textField;
-	private JLabel label;
 	
+	private CustomText textField;
+	private JLabel label;
+
 	private String description;
 	private int height;
-	
-	public BootstrapPanel(String iconPath, String description){
-		setBackground(new Color(201, 208, 232));
+
+	public CustomPanel(String description) {
+		setBackground(Colors.blue);
 		this.description = description;
 		setLayout(null);
-		
 		loadFormField();
 	}
-	
-	private void loadFormField(){
+
+	private void loadFormField() {
 		removeAll();
-		
 		height = this.getHeight() - 4;
-		
-		textField = new BootstrapTextField();
-		textField.setBounds(2, 2, getWidth() - (height + 2), height);
+		textField = new CustomText();
+		textField.setBounds(2, 2, getWidth() - 4, height);
 		textField.setBorder(BorderFactory.createEmptyBorder(5, 10, 5, 5));
-		textField.setFont(new Font("SansSerif", Font.TRUETYPE_FONT, (height / 2)));
-		textField.setForeground(new Color(154, 154, 154));
+		textField.setFont(Fonts.helv_15);
+		
+		// Font color
+		textField.setForeground(Colors.dark_gray);
 		textField.setPlaceholder(description);
 		add(textField);
-		
+
 		label = new JLabel();
 		label.setBounds(getWidth() - height, 2, height, height);
-		label.setBackground(new Color(220, 220, 220));
 		label.setHorizontalAlignment(JLabel.CENTER);
 		add(label);
 	}
-	
+
 	@Override
 	public void setFont(Font font) {
-		if(textField != null)
+		if (textField != null)
 			textField.setFont(font);
 	}
-	
-	public String getText(){
+
+	public String getText() {
 		return textField.getText();
 	}
-	
-	public void setText(String newText){
+
+	public void setText(String newText) {
 		textField.setText(newText);
 	}
-	
+
 	@Override
-	public void setForeground(Color color){
-		if(textField != null)
+	public void setForeground(Color color) {
+		if (textField != null)
 			textField.setForeground(color);
 	}
-	
+
 	@Override
-	public void setBounds(Rectangle bounds){
+	public void setBounds(Rectangle bounds) {
 		super.setBounds(bounds);
 		loadFormField();
 	}
-	
+
 	@Override
-	public void setBounds(int x, int y, int width, int height){
+	public void setBounds(int x, int y, int width, int height) {
 		super.setBounds(x, y, width, height);
 		loadFormField();
 	}
-	
+
 	@Override
 	public void setSize(int width, int height) {
 		super.setSize(width, height);
 		loadFormField();
 	}
-	
+
 	@Override
 	public void setSize(Dimension d) {
 		super.setSize(d);
 		loadFormField();
 	}
-	
-	
-	
+
 }
