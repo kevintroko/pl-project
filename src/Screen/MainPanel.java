@@ -409,7 +409,6 @@ public class MainPanel extends JFrame implements ActionListener {
 			try {
 				Thread.sleep(timeProducers);
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
 				return false;
 			}
 			sizeProducers--;
@@ -429,11 +428,20 @@ public class MainPanel extends JFrame implements ActionListener {
 			}
 			sizeConsumers--;
 		}
-		return sizeConsumers == 0 ? true : false;
+		if(sizeConsumers == 0){
+			return true;
+		}
+		else return false;
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
+	}
+	public void addremainingBuffer(int remainingOps, int bufferLength) {
+		remainingBuffer.setText(remainingOps * 100/ bufferLength + "%");
+	}
+	public void setBufferBarValue(int remainingOps, int bufferLength){
+		this.bufferBar.setValue(remainingOps * 100/ bufferLength );
 	}
 
 	public void addCompletedCounter(int completedOps) {
@@ -444,10 +452,5 @@ public class MainPanel extends JFrame implements ActionListener {
 		remainingCounter.setText("= " + remainingOps);
 	}
 
-	public void addremainingBuffer(int remainingOps, int bufferLength) {
-		remainingBuffer.setText(remainingOps * 100/ bufferLength + "%");
-	}
-	public void setBufferBarValue(int remainingOps, int bufferLength){
-		this.bufferBar.setValue(remainingOps * 100/ bufferLength );
-	}
+
 }

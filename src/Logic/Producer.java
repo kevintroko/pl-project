@@ -28,8 +28,8 @@ public class Producer extends Thread {
     	   String product = this.randomOperations.createOperation();
            try {
 			this.buffer.produce(product);
-           } catch (InterruptedException e1) {
-        	   e1.printStackTrace();
+           } catch (InterruptedException interruptedException) {
+        	   interruptedException.printStackTrace();
            }
            System.out.println("Producer produced: " + product);
            dashboard.addElementToRemainingList("Producer["+ this.getId() +"] produced: " + product);
@@ -40,9 +40,4 @@ public class Producer extends Thread {
            }
        }
     }
-
-    public void setCancel() {
-    	this.isStart = false;
-    }
-
 }
