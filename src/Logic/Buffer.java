@@ -1,4 +1,4 @@
-package Multithreading;
+package Logic;
 
 import java.util.LinkedList;
 import java.util.Queue;
@@ -25,12 +25,9 @@ public class Buffer {
     private MainPanel dashboard;
 
     public Buffer(int size, MainPanel dashboard) {
-        // this.storage = new LinkedList<>(Arrays.asList(new String[length]));
-
         this.storage = new LinkedList<String>();
         this.bufferSize = size;
         this.dashboard = dashboard;
-
         this.numberOfConsumerOperations = 0;
         this.numberOfProducerOperations = 0;
     }

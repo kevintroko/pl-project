@@ -1,4 +1,4 @@
-package Multithreading;
+package Logic;
 
 import Screen.MainPanel;
 

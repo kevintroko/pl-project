@@ -1,4 +1,4 @@
-package Multithreading;
+package Logic;
 
 import java.util.Random;
 

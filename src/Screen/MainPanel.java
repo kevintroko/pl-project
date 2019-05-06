@@ -12,9 +12,9 @@ import javax.swing.*;
 import GraphicComponents.CustomPanel;
 import Main.Colors;
 import Main.Fonts;
-import Multithreading.Buffer;
-import Multithreading.Consumer;
-import Multithreading.Producer;
+import Logic.Buffer;
+import Logic.Consumer;
+import Logic.Producer;
 
 /** @Author Kevin O. Cabrera */
 /** @Author Valentin Ochoa */
@@ -291,7 +291,7 @@ public class MainPanel extends JFrame implements ActionListener {
 		lProd = new JLabel("Number of Producers [1-10]");
 		lCons = new JLabel("Number of Consumers [1-10]");
 		lTimeProd = new JLabel("Time to produce (ms) [1-10,000]"); 
-		lTimeCons = new JLabel("Time to produce (ms) [1-10,000]");
+		lTimeCons = new JLabel("Time to consume (ms) [1-10,000]");
 
 		bufferSize.setBounds(x, 0, (width * 2 + width / 10), height);
 		numProducers.setBounds(x, (y + -y * 2), width, height);
